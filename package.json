@@ -1,0 +1,36 @@
+{
+  "name": "king-croc",
+  "version": "1.0.0",
+  "description": "King Croc, the Discord bot.",
+  "main": "index.js",
+  "repository": "https://github.com/desruc/king-croc.git",
+  "author": "James Cameron <36631337+desruc@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node --require module-alias/register dist/index.js",
+    "build": "rimraf dist && cd src && tsc && npm run deploy-commands",
+    "dev": "nodemon --config nodemon.json src/index.ts",
+    "deploy-commands-dev": "ts-node src/core/deployCommands.ts",
+    "deploy-commands": "node ./dist/core/deployCommands.js",
+    "lint": "eslint ./src/**/**.ts",
+    "lint:fix": "eslint ./src/**/**.ts --fix",
+    "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\""
+  },
+  "dependencies": {
+    "discord.js": "^13.7.0",
+    "dotenv": "^16.0.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.16",
+    "prettier": "^2.6.2",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
+  }
+}
