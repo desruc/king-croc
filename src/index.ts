@@ -2,8 +2,11 @@ import dotenv from "dotenv";
 import { Shard, ShardingManager } from "discord.js";
 import { resolve } from "path";
 import config from "./config";
+import initDb from "./db";
 
 dotenv.config();
+
+initDb();
 
 const { totalShards, discordToken } = config;
 
