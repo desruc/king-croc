@@ -1,6 +1,12 @@
-import { Client, ClientOptions, ClientEvents } from "discord.js";
+import { Client, ClientOptions, ClientEvents, Collection } from "discord.js";
 import { readdirSync } from "fs";
 import { resolve } from "path";
+import {
+  slashCommandCollection,
+  prefixedCommandCollection,
+  SlashCommand,
+  PrefixedCommand
+} from "./commandCollection";
 
 import config from "../config";
 
@@ -12,8 +18,14 @@ export interface DiscordEvent {
 export default class Bot {
   readonly client: Client;
 
+  public readonly slashCommands: Collection<string, SlashCommand>;
+
+  public readonly prefixedCommands: Collection<string, PrefixedCommand>;
+
   constructor(opts: ClientOptions) {
     this.client = new Client(opts);
+    this.slashCommands = slashCommandCollection;
+    this.prefixedCommands = prefixedCommandCollection;
   }
 
   public async initialize(): Promise<void> {

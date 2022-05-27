@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 import config from "../config";
-import { TriviaUser } from "./models/TriviaUser";
+import { TriviaUser } from "./entities/TriviaUser";
 
 const AppDataSource = new DataSource({
   type: "postgres",
