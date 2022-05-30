@@ -1,12 +1,14 @@
 import { Client, ClientOptions, ClientEvents, Collection } from "discord.js";
 import { readdirSync } from "fs";
 import { resolve } from "path";
+import { db } from "../db";
 import {
   slashCommandCollection,
   prefixedCommandCollection,
   SlashCommand,
   PrefixedCommand
 } from "./commandCollection";
+import initializeScheduler from "../schedule";
 
 import config from "../config";
 
@@ -26,10 +28,16 @@ export default class Bot {
     this.client = new Client(opts);
     this.slashCommands = slashCommandCollection;
     this.prefixedCommands = prefixedCommandCollection;
+
+    db.initialize()
+      .then(() => console.log("Database connected!"))
+      .catch(() => console.log("Error connecting to database."));
   }
 
   public async initialize(): Promise<void> {
     this.initializeEvents();
+
+    initializeScheduler(this.client);
 
     const { discordToken } = config;
     await this.client.login(discordToken);

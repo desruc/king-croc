@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 import config from "../config";
 import { TriviaUser } from "./entities/TriviaUser";
 
-const AppDataSource = new DataSource({
+export const db = new DataSource({
   type: "postgres",
   host: config.dbHost,
   port: config.dbPort,
@@ -16,13 +16,4 @@ const AppDataSource = new DataSource({
   migrations: []
 });
 
-async function initDb() {
-  try {
-    await AppDataSource.initialize();
-    console.log("Database connected!");
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export default initDb;
+export default db;

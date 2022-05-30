@@ -14,10 +14,6 @@ class MessageCreate implements DiscordEvent {
     const prefix = "!";
 
     const isPotentialCommand = message.content.startsWith(prefix);
-    console.log(
-      "🚀 ~ file: messageCreate.ts ~ line 17 ~ MessageCreate ~ exec ~ isPotentialCommand",
-      isPotentialCommand
-    );
 
     if (isPotentialCommand) {
       const potentialCommand = message.content.slice(1);
