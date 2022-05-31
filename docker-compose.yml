@@ -1,6 +1,18 @@
 version: '3.7'
 
 services:
+  discordbot:
+    build: .
+    container_name: kingcroc-bot
+    environment:
+      - TOTAL_SHARDS=1
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - CLIENT_ID=${CLIENT_ID}
+      - GUILD_ID=${GUILD_ID}
+      - DB_HOST=postgres
+    ports:
+      - "8000:8000"
+
   postgres:
     container_name: king-croc-postgresdb
     image: postgres:10.5
@@ -13,8 +25,6 @@ services:
       - APP_DB_NAME=king-croc
     volumes:
       - ./docker-db-scripts:/docker-entrypoint-initdb.d/
-    networks:
-      - postgres
     ports:
       - 5432:5432
 
@@ -29,13 +39,7 @@ services:
        - pgadmin:/var/lib/pgadmin
     ports:
       - "5050:80"
-    networks:
-      - postgres
     restart: on-failure
-
-networks:
-  postgres:
-    driver: bridge
 
 volumes:
     postgres:

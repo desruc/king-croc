@@ -8,10 +8,10 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=production node --require module-alias/register dist/index.js",
-    "build": "rimraf dist && cd src && tsc && npm run deploy-commands",
+    "build": "rimraf dist && cd src && tsc",
     "dev": "nodemon --config nodemon.json src/index.ts",
     "deploy-commands-dev": "ts-node src/core/deployCommands.ts",
-    "deploy-commands": "node ./dist/core/deployCommands.js",
+    "deploy-commands": "node ./core/deployCommands.js",
     "lint": "eslint ./src/**/**.ts",
     "lint:fix": "eslint ./src/**/**.ts --fix",
     "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\""

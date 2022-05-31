@@ -1,0 +1,10 @@
+.git
+Dockerfile
+docker-compose*
+node_modules
+.env
+.env.example
+
+# Typescript out directory
+dist
+dist/
