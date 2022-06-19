@@ -8,7 +8,9 @@ const config = {
   dbPort: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
   dbUser: process.env.DB_USER! || "root",
   dbPassword: process.env.DB_PASSWORD! || "password",
-  dbName: process.env.DB_NAME! || "root"
+  dbName: process.env.DB_NAME! || "root",
+  seqServerUrl: process.env.SEQ_SERVER_URL,
+  seqApiKey: process.env.SEQ_API_KEY
 };
 
 export default config;

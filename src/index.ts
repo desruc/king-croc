@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { Shard, ShardingManager } from "discord.js";
 import { resolve } from "path";
+import logger from "./core/logger";
 import config from "./config";
 
 dotenv.config();
@@ -23,11 +24,11 @@ const shardingManager = new ShardingManager(
 );
 
 const onShardDisconnect = (shardId: number) => () => {
-  console.warn(`[ShardManager] Shard #${shardId} Disconnected`);
+  logger.warn(`[ShardManager] Shard #${shardId} Disconnected`);
 };
 
 const onShardReconnect = (shardId: number) => () => {
-  console.info(`[ShardManager] Shard #${shardId} Reconnected`);
+  logger.info(`[ShardManager] Shard #${shardId} Reconnected`);
 };
 
 const onShardCreate = (shard: Shard) => {
@@ -35,19 +36,19 @@ const onShardCreate = (shard: Shard) => {
   shard.on("disconnect", onShardDisconnect(shard.id));
   shard.on("reconnection", onShardReconnect(shard.id));
   if (shardsSpawned === shardingManager.totalShards) {
-    console.info("[ShardManager] All shards spawned successfully.");
+    logger.info("[ShardManager] All shards spawned successfully.");
   }
 };
 
 shardingManager.on("shardCreate", onShardCreate).spawn({ amount: shardCount });
 
 process.on("unhandledRejection", (e) => {
-  console.error("UNHANDLED_REJECTION: ", e);
+  logger.error("UNHANDLED_REJECTION: ", e);
 });
 
 process.on("uncaughtException", (e) => {
-  console.error("UNCAUGHT_EXCEPTION: ", e);
-  console.warn("NODE_WARN: ", {
+  logger.error("UNCAUGHT_EXCEPTION: ", e);
+  logger.warn("NODE_WARN: ", {
     stack: "Uncaught Exception detected. Restarting..."
   });
 });

@@ -41,6 +41,15 @@ services:
       - "5050:80"
     restart: on-failure
 
+  seq-server:
+    image: datalust/seq:latest
+    container_name: seq-server
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5342:80"
+      - "5341:5341"
+
 volumes:
     postgres:
     pgadmin:

@@ -11,6 +11,7 @@ import {
 import initializeScheduler from "../schedule";
 
 import config from "../config";
+import logger from "./logger";
 
 export interface DiscordEvent {
   name: keyof ClientEvents;
@@ -30,8 +31,8 @@ export default class Bot {
     this.prefixedCommands = prefixedCommandCollection;
 
     db.initialize()
-      .then(() => console.log("Database connected!"))
-      .catch(() => console.log("Error connecting to database."));
+      .then(() => logger.info("Database connected!"))
+      .catch(() => logger.error("Error connecting to database."));
   }
 
   public async initialize(): Promise<void> {

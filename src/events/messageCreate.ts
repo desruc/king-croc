@@ -1,4 +1,5 @@
 import { Message } from "discord.js";
+import logger from "../core/logger";
 import Bot, { DiscordEvent } from "../core/bot";
 
 class MessageCreate implements DiscordEvent {
@@ -25,7 +26,7 @@ class MessageCreate implements DiscordEvent {
       try {
         await command.execute(message);
       } catch (error) {
-        console.error(error);
+        logger.error(error);
         await message.reply({
           content: "My apologies! There was an error executing the command..."
         });

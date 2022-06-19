@@ -1,5 +1,6 @@
 import { Guild } from "discord.js";
 import { Job as ScheduledJob } from "node-schedule";
+import logger from "../../core/logger";
 import { randomNumber, getTextChannel } from "../../utils/helpers";
 import { hasUserAnswered } from "./databaseActions";
 import { getQuestionData } from "./getQuestionData";
@@ -31,7 +32,7 @@ const getTriviaTime = () => {
 export const rescheduleTrivia = (job: ScheduledJob) => {
   const nextTime = getTriviaTime();
   job.reschedule(nextTime);
-  console.info(`The next trivia question will be sent on ${job.nextInvocation()}`);
+  logger.info(`The next trivia question will be sent on ${job.nextInvocation()}`);
 };
 
 export async function sendTriviaQuestion(guild: Guild) {
